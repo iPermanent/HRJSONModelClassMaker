@@ -42,6 +42,7 @@ static HRModelUtil *_modelUtl = nil;
     //添加属性值
     [writeString appendFormat:@"@interface %@ : NSObject<NSCoding>\n\n",className];
     for(NSString *key in dictionary.allKeys){
+        NSLog(@"%@",key);
         [writeString appendString:[self getPropertyParamStringByProperty:key value:dictionary[key]]];
     }
     
@@ -52,6 +53,9 @@ static HRModelUtil *_modelUtl = nil;
 }
 
 -(NSString *)getPropertyParamStringByProperty:(NSString *)property value:(id)value{
+    if([property isEqualToString:@"UserPhoto"]){
+        NSLog(@"%@",value);
+    }
     if([value isKindOfClass:[NSString class]]){
         return [NSString stringWithFormat:@"@property (nonatomic, copy) NSString *%@;\n",property];
     }else if([value isKindOfClass:[NSDictionary class]]){
@@ -60,7 +64,10 @@ static HRModelUtil *_modelUtl = nil;
     }else if([value isKindOfClass:[NSNumber class]]){
         return [NSString stringWithFormat:@"@property (nonatomic, strong) NSNumber *%@;\n",property];
     }else if([value isKindOfClass:[NSArray class]]){
-        [self dealClassWithDictionary:value WithClassName:property];
+        id obj = value[0];
+        if(![obj isKindOfClass:[NSString class]] && ![obj isKindOfClass:[NSNumber class]]){
+            [self dealClassWithDictionary:[value firstObject] WithClassName:property];
+        }
         return [NSString stringWithFormat:@"@property (nonatomic, strong) NSArray *%@;\n",property];
     }else{
         return @"";
