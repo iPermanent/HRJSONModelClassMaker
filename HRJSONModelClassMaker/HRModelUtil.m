@@ -53,9 +53,6 @@ static HRModelUtil *_modelUtl = nil;
 }
 
 -(NSString *)getPropertyParamStringByProperty:(NSString *)property value:(id)value{
-    if([property isEqualToString:@"UserPhoto"]){
-        NSLog(@"%@",value);
-    }
     if([value isKindOfClass:[NSString class]]){
         return [NSString stringWithFormat:@"@property (nonatomic, copy) NSString *%@;\n",property];
     }else if([value isKindOfClass:[NSDictionary class]]){
