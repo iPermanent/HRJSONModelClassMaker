@@ -14,8 +14,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="className" destination="MzA-V5-9wu" id="bAK-cW-1bN"/>
                 <outlet property="inputJsonText" destination="Xtu-g9-ZfW" id="z4O-eg-GMv"/>
-                <outlet property="resultLabel" destination="jpr-Bt-TYv" id="lkZ-2Y-loF"/>
+                <outlet property="resultLabel" destination="B4q-cz-2jO" id="DCg-Eh-nOH"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -706,12 +707,20 @@
                             <action selector="startOutputClassFile:" target="Voe-Tx-rLC" id="8s9-AO-g2D"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpr-Bt-TYv">
-                        <rect key="frame" x="346" y="299" width="56" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="选择路径" id="1bE-vP-h4I">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4q-cz-2jO">
+                        <rect key="frame" x="346" y="223" width="116" height="88"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="选择路径" id="xZo-hO-dy2">
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MzA-V5-9wu">
+                        <rect key="frame" x="348" y="169" width="120" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="输入生成类名" drawsBackground="YES" id="0KO-kG-TvG">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>

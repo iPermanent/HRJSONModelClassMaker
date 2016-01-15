@@ -11,8 +11,9 @@
 
 @interface AppDelegate ()
 {
-    IBOutlet NSTextField    *resultLabel;
-    IBOutlet NSTextField    *inputJsonText;
+    IBOutlet    NSTextField     *resultLabel;
+    IBOutlet    NSTextField     *inputJsonText;
+    IBOutlet    NSTextField     *className;
     
     NSString *outputPath;
 }
@@ -53,7 +54,7 @@
         resultLabel.stringValue = @"格式有误";
     }else{
         [[HRModelUtil shareUtil] setPath:outputPath];
-        [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:@"baseModel"];
+        [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:className.stringValue.length > 1?className.stringValue:@"baseModel"];
     }
 }
 
