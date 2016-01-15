@@ -70,7 +70,7 @@ static HRModelUtil *_modelUtl = nil;
         }
         return [NSString stringWithFormat:@"@property (nonatomic, strong) NSArray *%@;\n",property];
     }else{
-        return @"";
+        return [NSString stringWithFormat:@"@property (nonatomic, strong) %@ *%@;\n",property,property];
     }
 }
 
