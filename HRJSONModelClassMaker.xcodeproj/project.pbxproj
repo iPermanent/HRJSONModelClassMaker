@@ -13,9 +13,13 @@
 		7E5358C71C48878200429A75 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5358C51C48878200429A75 /* MainMenu.xib */; };
 		7E5358D01C488B9000429A75 /* HRModelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358CF1C488B9000429A75 /* HRModelUtil.m */; };
 		7E5358D31C489B6500429A75 /* HRBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D21C489B6500429A75 /* HRBaseModel.m */; };
+		7E5358D61C4BC78700429A75 /* HRApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D51C4BC78700429A75 /* HRApiClient.m */; };
+		ECE88DBC8F1B9509EEEB338B /* libPods-HRJSONModelClassMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HRJSONModelClassMaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58858BB2FCB9538174CE4FD8 /* Pods-HRJSONModelClassMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRJSONModelClassMaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		7E5358BA1C48878200429A75 /* HRJSONModelClassMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HRJSONModelClassMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5358BD1C48878200429A75 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7E5358BE1C48878200429A75 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -27,6 +31,9 @@
 		7E5358CF1C488B9000429A75 /* HRModelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRModelUtil.m; sourceTree = "<group>"; };
 		7E5358D11C489B6500429A75 /* HRBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBaseModel.h; sourceTree = "<group>"; };
 		7E5358D21C489B6500429A75 /* HRBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBaseModel.m; sourceTree = "<group>"; };
+		7E5358D41C4BC78700429A75 /* HRApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRApiClient.h; sourceTree = "<group>"; };
+		7E5358D51C4BC78700429A75 /* HRApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRApiClient.m; sourceTree = "<group>"; };
+		8943798348841D1377529348 /* Pods-HRJSONModelClassMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRJSONModelClassMaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECE88DBC8F1B9509EEEB338B /* libPods-HRJSONModelClassMaker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C6A0CC2D9DE1AF1F39A935B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				58858BB2FCB9538174CE4FD8 /* Pods-HRJSONModelClassMaker.debug.xcconfig */,
+				8943798348841D1377529348 /* Pods-HRJSONModelClassMaker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7E5358B11C48878200429A75 = {
 			isa = PBXGroup;
 			children = (
 				7E5358BC1C48878200429A75 /* HRJSONModelClassMaker */,
 				7E5358BB1C48878200429A75 /* Products */,
+				2C6A0CC2D9DE1AF1F39A935B /* Pods */,
+				EAD090164BEFAB51B9D803CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +78,8 @@
 		7E5358BC1C48878200429A75 /* HRJSONModelClassMaker */ = {
 			isa = PBXGroup;
 			children = (
+				7E5358D41C4BC78700429A75 /* HRApiClient.h */,
+				7E5358D51C4BC78700429A75 /* HRApiClient.m */,
 				7E5358BD1C48878200429A75 /* AppDelegate.h */,
 				7E5358BE1C48878200429A75 /* AppDelegate.m */,
 				7E5358C31C48878200429A75 /* Assets.xcassets */,
@@ -81,6 +102,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EAD090164BEFAB51B9D803CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,9 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E5358CB1C48878200429A75 /* Build configuration list for PBXNativeTarget "HRJSONModelClassMaker" */;
 			buildPhases = (
+				7C209CD8A04006A3AE4004FD /* Check Pods Manifest.lock */,
 				7E5358B61C48878200429A75 /* Sources */,
 				7E5358B71C48878200429A75 /* Frameworks */,
 				7E5358B81C48878200429A75 /* Resources */,
+				AE7FDA15C7F76D0CADE2FA67 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,12 +176,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7C209CD8A04006A3AE4004FD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AE7FDA15C7F76D0CADE2FA67 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7E5358B61C48878200429A75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7E5358C21C48878200429A75 /* main.m in Sources */,
+				7E5358D61C4BC78700429A75 /* HRApiClient.m in Sources */,
 				7E5358BF1C48878200429A75 /* AppDelegate.m in Sources */,
 				7E5358D31C489B6500429A75 /* HRBaseModel.m in Sources */,
 				7E5358D01C488B9000429A75 /* HRModelUtil.m in Sources */,
@@ -252,6 +317,7 @@
 		};
 		7E5358CC1C48878200429A75 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58858BB2FCB9538174CE4FD8 /* Pods-HRJSONModelClassMaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -264,6 +330,7 @@
 		};
 		7E5358CD1C48878200429A75 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8943798348841D1377529348 /* Pods-HRJSONModelClassMaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

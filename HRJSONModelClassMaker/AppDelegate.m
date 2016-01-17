@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "HRModelUtil.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate>
 {
     IBOutlet    NSTextField     *resultLabel;
     IBOutlet    NSTextField     *inputJsonText;
@@ -18,12 +18,14 @@
     NSString *outputPath;
 }
 @property (weak) IBOutlet NSWindow *window;
+@property (nonatomic,strong)NSMutableDictionary *parameters;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    _parameters = [NSMutableDictionary new];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -56,6 +58,16 @@
         [[HRModelUtil shareUtil] setPath:outputPath];
         [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:className.stringValue.length > 1?className.stringValue:@"baseModel"];
     }
+}
+
+#pragma mark- tableView function
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    return 4;
+    return _parameters.allKeys.count;
+}
+
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row{
+    return 40.0;
 }
 
 @end
