@@ -29,7 +29,7 @@
 }
 @property   (weak) IBOutlet NSWindow *window;
 @property   (nonatomic,weak)IBOutlet NSTableView    *table;
-//@property   (nonatomic,weak)IBOutlet NSTableView    *headerTable;
+@property   (nonatomic,weak)IBOutlet NSTableView    *headerTable;
 @property   (nonatomic,strong)NSMutableDictionary   *parameters;
 @property   (nonatomic,strong)NSMutableDictionary   *headers;
 @end
@@ -40,6 +40,9 @@
     // Insert code here to initialize your application
     _table.dataSource = self;
     _table.delegate = self;
+    
+    _headerTable.dataSource = self;
+    _headerTable.delegate = self;
     _parameters =   [NSMutableDictionary new];
     _headers    =   [NSMutableDictionary new];
 }
@@ -112,7 +115,7 @@
 -(IBAction)addHttpHeaders:(id)sender{
     if(headerTF.stringValue.length > 0 && headerValueTF.stringValue.length > 0){
         [_headers setObject:headerValueTF.stringValue forKey:headerTF.stringValue];
-        [_table reloadData];
+        [_headerTable reloadData];
     }
 }
 
@@ -157,7 +160,7 @@
             return cellView;
         }else{
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
-            NSButton *deleteBtn = [[NSButton alloc] initWithFrame:NSMakeRect(10, 5, 100, 30)];
+            NSButton *deleteBtn = [[NSButton alloc] initWithFrame:NSMakeRect(10, 5, 60, 30)];
             deleteBtn.layer.backgroundColor = [NSColor redColor].CGColor;
             deleteBtn.tag = row;
             [deleteBtn setTitle:@"删除"];
@@ -196,7 +199,7 @@
 -(void)deleteHeader:(NSButton *)sender{
     NSString *key = [_headers.allKeys objectAtIndex:sender.tag];
     [_headers removeObjectForKey:key];
-    [_table reloadData];
+    [_headerTable reloadData];
 }
 
 -(void)deleteParam:(NSButton *)sender{
