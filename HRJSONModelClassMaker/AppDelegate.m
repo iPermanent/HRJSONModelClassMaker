@@ -81,6 +81,10 @@
 -(IBAction)startRequest:(id)sender{
     if(url.stringValue.length < 1 || ![url.stringValue hasPrefix:@"http://"]){
         inputJsonText.stringValue = @"URL不合法，请检查！";
+        return;
+    }
+    for(NSString *key in _headers.allKeys){
+        [[[HRApiClient sharedClient] requestSerializer] setValue:_headers[key] forHTTPHeaderField:key];
     }
     NSString  *way = requestWay.selectedItem.title;
     if([way isEqualToString:@"Post"]){
@@ -91,12 +95,16 @@
                 inputJsonText.stringValue = jsonString;
             }
         }];
-    }else{
-        for(NSString *key in _headers.allKeys){
-            [[[HRApiClient sharedClient] requestSerializer] setValue:_headers[key] forHTTPHeaderField:key];
-        }
+    }else if([way isEqualToString:@"Get"]){
         [[HRApiClient sharedClient] getPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             NSLog(@"%@",aResponse);
+            if(aResponse){
+                NSString *jsonString = [self jsonStringWithObject:aResponse];
+                inputJsonText.stringValue = jsonString;
+            }
+        }];
+    }else{
+        [[HRApiClient sharedClient] uploadWithMultipartFormsparam:url.stringValue imageUrls:nil andParameters:_parameters withCompletion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 NSString *jsonString = [self jsonStringWithObject:aResponse];
                 inputJsonText.stringValue = jsonString;
