@@ -37,7 +37,7 @@ static HRApiClient *_sharedClient = nil;
 
     NSURLSessionDataTask *task = [self POST:aPath parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         if (aCompletion) {
-            if([[responseObject stringForKey:@"type"] isEqualToString:@"SUCCESS"])
+            if(responseObject)
                 aCompletion(task, responseObject, nil);
             else{
                 NSError *error = [[NSError alloc] initWithDomain:@"" code:-1 userInfo:responseObject];

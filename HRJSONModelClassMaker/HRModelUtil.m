@@ -21,6 +21,10 @@ static HRModelUtil *_modelUtl = nil;
 }
 
 -(void)dealClassWithDictionary:(NSDictionary *)dic WithClassName:(NSString *)className{
+    //if it's array type, get the first element
+    if([dic isKindOfClass:[NSArray class]]){
+        dic = [(NSArray *)dic objectAtIndex:0];
+    }
     NSString *headerContent = [self getClassHeaderContentStringByDictionary:dic WithClassName:className];
     NSString *bodyContent = [self getClassBodyContentStringByDictionary:dic withClassName:className];
     
@@ -36,17 +40,17 @@ static HRModelUtil *_modelUtl = nil;
 -(NSString *)getClassHeaderContentStringByDictionary:(NSDictionary *)dictionary WithClassName:(NSString *)className{
     NSMutableString *writeString = [NSMutableString new];
     
-    //添加头部
+    //add Header
     [writeString appendString:@"#import <Foundation/Foundation.h>\n\n"];
     
-    //添加属性值
+    //add properties
     [writeString appendFormat:@"@interface %@ : NSObject<NSCoding>\n\n",className];
     for(NSString *key in dictionary.allKeys){
         NSLog(@"%@",key);
         [writeString appendString:[self getPropertyParamStringByProperty:key value:dictionary[key]]];
     }
     
-    //添加尾部
+    //add end
     [writeString appendString:@"@end"];
     
     return writeString;
