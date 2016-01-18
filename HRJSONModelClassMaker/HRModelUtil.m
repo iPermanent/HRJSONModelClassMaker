@@ -44,7 +44,7 @@ static HRModelUtil *_modelUtl = nil;
     [writeString appendString:@"#import <Foundation/Foundation.h>\n\n"];
     
     //add properties
-    [writeString appendFormat:@"@interface %@ : NSObject<NSCoding>\n\n",className];
+    [writeString appendFormat:@"@interface %@ : %@<NSCoding>\n\n",_baseClassName?_baseClassName:@"NSObject",className];
     for(NSString *key in dictionary.allKeys){
         NSLog(@"%@",key);
         [writeString appendString:[self getPropertyParamStringByProperty:key value:dictionary[key]]];

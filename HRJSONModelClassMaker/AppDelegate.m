@@ -15,6 +15,7 @@
     IBOutlet    NSTextField     *resultLabel;
     IBOutlet    NSTextField     *inputJsonText;
     IBOutlet    NSTextField     *className;
+    IBOutlet    NSTextField     *baseClassName;
     
     NSString *outputPath;
     
@@ -74,6 +75,8 @@
         resultLabel.stringValue = @"格式有误";
     }else{
         [[HRModelUtil shareUtil] setPath:outputPath];
+        if(baseClassName.stringValue.length > 0)
+            [[HRModelUtil shareUtil] setBaseClassName:baseClassName.stringValue];
         [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:className.stringValue.length > 1?className.stringValue:@"baseModel"];
     }
 }

@@ -10,7 +10,8 @@
 
 @interface HRModelUtil : NSObject
 
-@property(nonatomic,copy)NSString *path;
+@property(nonatomic,copy)NSString   *path;
+@property(nonatomic,copy)NSString   *baseClassName;
 
 +(HRModelUtil *)shareUtil;
 
