@@ -124,6 +124,7 @@
 				7E5358B71C48878200429A75 /* Frameworks */,
 				7E5358B81C48878200429A75 /* Resources */,
 				AE7FDA15C7F76D0CADE2FA67 /* Copy Pods Resources */,
+				12E62EE06DAD58D9AFF2236B /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,6 +186,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12E62EE06DAD58D9AFF2236B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7C209CD8A04006A3AE4004FD /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
