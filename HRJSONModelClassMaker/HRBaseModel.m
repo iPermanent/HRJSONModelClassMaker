@@ -7,7 +7,7 @@
 //
 
 //model解析时，类的前缀，可以为空
-#define classPrefix @"MV_"
+#define classPrefix @""
 
 #import "HRBaseModel.h"
 
@@ -27,10 +27,6 @@
             }else if([obj isKindOfClass:[NSArray class]]){
                 [self configArrayValue:obj withKey:key];
             }else{
-                NSDictionary *mapDic = [self mapDictionary];
-                NSString *modelKey = key;
-                if(mapDic && [mapDic objectForKey:key])
-                    modelKey = [mapDic objectForKey:key];
                 [self setValue:obj forKeyPath:key];
             }
         }
@@ -38,7 +34,7 @@
     return self;
 }
 
-//简单的只有一层的数据对象型属性
+//解析字典型数据
 -(void)configDicValue:(id)obj withKey:(NSString *)key{
     Class clazz = NSClassFromString([NSString stringWithFormat:@"%@%@",classPrefix,key]);
     if(clazz){
@@ -49,7 +45,7 @@
     }
 }
 
-//简单的数组类型，仅支持一层数据解析
+//解析数组型数据
 -(void)configArrayValue:(id)obj withKey:(NSString *)key{
     NSString *className = [NSString stringWithFormat:@"%@%@",classPrefix,key];
     Class clazz = NSClassFromString(className);
@@ -66,12 +62,7 @@
 }
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    //NSLog(@"class:%@ key:%@ not exist",NSStringFromClass([self class]),key);
-}
-
--(NSDictionary *)mapDictionary{
-    //NSLog(@"baseModel mapDic will never do anything");
-    return nil;
+    NSLog(@"class:%@ key:%@ not exist",NSStringFromClass([self class]),key);
 }
 
 @end

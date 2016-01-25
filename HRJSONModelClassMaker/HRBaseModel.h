@@ -12,10 +12,4 @@
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 
-/*映射关系字典，{
-    前方为服务器返回，后面为model定义的属性
-    @"id" = @"ID"
-}*/
--(NSDictionary *)mapDictionary;
-
 @end

@@ -21,7 +21,7 @@
 		02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HRJSONModelClassMaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58858BB2FCB9538174CE4FD8 /* Pods-HRJSONModelClassMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRJSONModelClassMaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1FEC991C4DDD40001F6BC0 /* HRJSONModelClassMaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HRJSONModelClassMaker.entitlements; sourceTree = "<group>"; };
-		7E5358BA1C48878200429A75 /* HRJSONModelClassMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HRJSONModelClassMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E5358BA1C48878200429A75 /* Request-Class.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Request-Class.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5358BD1C48878200429A75 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7E5358BE1C48878200429A75 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7E5358C11C48878200429A75 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		7E5358BB1C48878200429A75 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E5358BA1C48878200429A75 /* HRJSONModelClassMaker.app */,
+				7E5358BA1C48878200429A75 /* Request-Class.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7E5358B91C48878200429A75 /* HRJSONModelClassMaker */ = {
+		7E5358B91C48878200429A75 /* Request-Class */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7E5358CB1C48878200429A75 /* Build configuration list for PBXNativeTarget "HRJSONModelClassMaker" */;
+			buildConfigurationList = 7E5358CB1C48878200429A75 /* Build configuration list for PBXNativeTarget "Request-Class" */;
 			buildPhases = (
 				7C209CD8A04006A3AE4004FD /* Check Pods Manifest.lock */,
 				7E5358B61C48878200429A75 /* Sources */,
@@ -130,9 +130,9 @@
 			);
 			dependencies = (
 			);
-			name = HRJSONModelClassMaker;
+			name = "Request-Class";
 			productName = HRJSONModelClassMaker;
-			productReference = 7E5358BA1C48878200429A75 /* HRJSONModelClassMaker.app */;
+			productReference = 7E5358BA1C48878200429A75 /* Request-Class.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -168,7 +168,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7E5358B91C48878200429A75 /* HRJSONModelClassMaker */,
+				7E5358B91C48878200429A75 /* Request-Class */,
 			);
 		};
 /* End PBXProject section */
@@ -350,7 +350,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HRJSONModelClassMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipermanent.classmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ea259798-8a26-4c48-8062-78c666f79a91";
@@ -368,7 +368,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HRJSONModelClassMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipermanent.classmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e747358e-2b49-4e73-b0da-1ff1ea786634";
@@ -387,7 +387,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7E5358CB1C48878200429A75 /* Build configuration list for PBXNativeTarget "HRJSONModelClassMaker" */ = {
+		7E5358CB1C48878200429A75 /* Build configuration list for PBXNativeTarget "Request-Class" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7E5358CC1C48878200429A75 /* Debug */,
