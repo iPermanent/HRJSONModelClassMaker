@@ -59,7 +59,7 @@ typedef void (^UploadProgress)(long long sent, long long expectSend);
 -(NSURLSessionDataTask *)postPathForUpload:(NSString *)path
                              andParameters:(NSDictionary *)paremeters
                                    andData:(NSData *)data
-                                 withNames:(NSString *)name
+                                 withName:(NSString *)name
                                 completion:(ApiCompletion)aCompletion
                                andProgress:(UploadProgress)progress;
 

@@ -92,7 +92,7 @@ static HRApiClient *_sharedClient = nil;
 /*
  兼容iOS7/8的上传方法，支持进度上传
  */
--(NSURLSessionDataTask *)postPathForUpload:(NSString *)path andParameters:(NSDictionary *)paremeters andData:(NSData *)data withNames:(NSString *)name completion:(ApiCompletion)aCompletion andProgress:(UploadProgress)progress{
+-(NSURLSessionDataTask *)postPathForUpload:(NSString *)path andParameters:(NSDictionary *)paremeters andData:(NSData *)data withName:(NSString *)name completion:(ApiCompletion)aCompletion andProgress:(UploadProgress)progress{
     
     NSURLSessionDataTask *task = [NSURLSessionDataTask new];
     
@@ -164,6 +164,19 @@ static HRApiClient *_sharedClient = nil;
             completion(nil,nil,error);
         }
     }];
+}
+
+-(NSString *)getMIMETypeByFileName:(NSString *)fileName{
+    NSArray *images = @[@"jpg",@"png",@"jpeg",@"bmp"];
+    NSArray *sounds = @[@"caf",@"wav",@"amr",@"mp3",@"wma"];
+    
+    if([images containsObject:[[fileName pathExtension] lowercaseString]]){
+        return @"image/jpeg";
+    }else if([sounds containsObject:[[fileName pathExtension] lowercaseString]]){
+        return @"audio/mp3";
+    }else{
+        return @"file/unkown";
+    }
 }
 
 @end
