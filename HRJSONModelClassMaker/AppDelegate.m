@@ -38,12 +38,15 @@
 @property   (nonatomic,strong)NSMutableDictionary   *parameters;
 @property   (nonatomic,strong)NSMutableDictionary   *headers;
 @property   (nonatomic,strong)NSMutableArray        *paths;
+
+@property   (nonatomic,weak)IBOutlet NSScrollView    *tableBase;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    
     _table.dataSource = self;
     _table.delegate = self;
     
@@ -56,6 +59,7 @@
     _parameters =   [NSMutableDictionary new];
     _headers    =   [NSMutableDictionary new];
     _paths      =   [NSMutableArray new];
+    filePath.editable = NO;
     
     [requestWay setAction:@selector(requestWayChanged:)];
     [self requestWayChanged:requestWay];
@@ -66,17 +70,16 @@
         selectFileButton.hidden = NO;
         if([requestWay.selectedItem.title isEqualToString:@"Post"]){
             filePath.hidden = NO;
-            _filesTable.hidden = YES;
-            [_filesTable removeFromSuperview];
+            [_tableBase setHidden:YES];
         }else{
             filePath.stringValue = @"";
             filePath.hidden = YES;
-            _filesTable.hidden = NO;
+            [_tableBase setHidden:NO];
         }
     }else{
         selectFileButton.hidden = YES;
         filePath.hidden = YES;
-        _filesTable.hidden = YES;
+        [_tableBase setHidden:YES];
     }
     
     if(![requestWay.selectedItem.title isEqualToString:@"Multipart Post"]){
@@ -142,20 +145,23 @@
         inputJsonText.stringValue = @"URL不合法，请检查！";
         return;
     }
+    NSButton *startBtn = sender;
+    
     for(NSString *key in _headers.allKeys){
         [[[HRApiClient sharedClient] requestSerializer] setValue:_headers[key] forHTTPHeaderField:key];
     }
     NSString  *way = requestWay.selectedItem.title;
     if([way isEqualToString:@"Post"]){
+        startBtn.enabled = NO;
         //如果有文件需要上传的
         if(filePath.stringValue.length > 0){
-            NSButton *startBtn = sender;
-            startBtn.enabled = NO;
             [[HRApiClient sharedClient] postPathForUpload:url.stringValue andParameters:_parameters andData:[NSData dataWithContentsOfFile:filePath.stringValue] withName:@"file" completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
                 startBtn.enabled = YES;
                 if(aResponse){
                     NSString *jsonString = [self jsonStringWithObject:aResponse];
                     inputJsonText.stringValue = jsonString;
+                }else{
+                    inputJsonText.stringValue = anError.description;
                 }
             } andProgress:^(long long sent, long long expectSend) {
                 inputJsonText.stringValue = [NSString stringWithFormat:@"%lld data sent of %lld total data need sent",sent,expectSend];
@@ -166,22 +172,33 @@
                 if(aResponse){
                     NSString *jsonString = [self jsonStringWithObject:aResponse];
                     inputJsonText.stringValue = jsonString;
+                }else{
+                    inputJsonText.stringValue = anError.description;
                 }
+                startBtn.enabled = YES;
             }];
         }
     }else if([way isEqualToString:@"Get"]){
+        startBtn.enabled = NO;
         [[HRApiClient sharedClient] getPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 NSString *jsonString = [self jsonStringWithObject:aResponse];
                 inputJsonText.stringValue = jsonString;
+            }else{
+                inputJsonText.stringValue = anError.description;
             }
+            startBtn.enabled = YES;
         }];
     }else{
+        startBtn.enabled = NO;
         [[HRApiClient sharedClient] uploadWithMultipartFormsparam:url.stringValue imageUrls:_paths andParameters:_parameters withCompletion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 NSString *jsonString = [self jsonStringWithObject:aResponse];
                 inputJsonText.stringValue = jsonString;
+            }else{
+                inputJsonText.stringValue = anError.description;
             }
+            startBtn.enabled = YES;
         }];
     }
 }
@@ -199,7 +216,7 @@
     if(headerTF.stringValue.length > 0 && headerValueTF.stringValue.length > 0){
         [_headers setObject:headerValueTF.stringValue forKey:headerTF.stringValue];
         headerTF.stringValue = @"";
-        headerTF.stringValue = @"";
+        headerValueTF.stringValue = @"";
         [_headerTable reloadData];
     }
 }
@@ -271,7 +288,7 @@
             return cellView;
         }else{
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
-            NSButton *deleteBtn = [[NSButton alloc] initWithFrame:NSMakeRect(10, 0, 100, 30)];
+            NSButton *deleteBtn = [[NSButton alloc] initWithFrame:NSMakeRect(10, 0, 60, 30)];
             deleteBtn.layer.backgroundColor = [NSColor redColor].CGColor;
             deleteBtn.tag = row;
             [deleteBtn setTitle:@"删除"];
