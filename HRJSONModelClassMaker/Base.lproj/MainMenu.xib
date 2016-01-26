@@ -739,7 +739,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-wL-XOo">
-                        <rect key="frame" x="8" y="581" width="156" height="22"/>
+                        <rect key="frame" x="8" y="568" width="156" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="parameter key" drawsBackground="YES" id="ZSu-2y-6Ni">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -747,7 +747,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-Cx-38k">
-                        <rect key="frame" x="179" y="581" width="156" height="22"/>
+                        <rect key="frame" x="179" y="568" width="156" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="parameter Value" drawsBackground="YES" id="DPf-EW-m7y">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -755,7 +755,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wtH-me-RQP">
-                        <rect key="frame" x="342" y="575" width="92" height="32"/>
+                        <rect key="frame" x="342" y="562" width="92" height="32"/>
                         <buttonCell key="cell" type="push" title="添加参数" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1NJ-H4-VEL">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -895,7 +895,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Nz-qv-cO1">
-                        <rect key="frame" x="8" y="550" width="156" height="22"/>
+                        <rect key="frame" x="8" y="526" width="156" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="httpHeader" drawsBackground="YES" id="8jP-Ja-ejH">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -903,7 +903,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r2O-uB-HPr">
-                        <rect key="frame" x="179" y="550" width="156" height="22"/>
+                        <rect key="frame" x="179" y="526" width="156" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="HeaderValue" drawsBackground="YES" id="L71-2C-lVM">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -911,7 +911,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwo-sN-nb1">
-                        <rect key="frame" x="342" y="544" width="92" height="32"/>
+                        <rect key="frame" x="342" y="520" width="92" height="32"/>
                         <buttonCell key="cell" type="push" title="添加http头" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jFL-Px-Vdc">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
