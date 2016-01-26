@@ -30,6 +30,9 @@
     
     IBOutlet    NSButton    *selectFileButton;
     IBOutlet    NSTextField *filePath;
+    
+    //stored json string that not formated
+    NSString    *realJsonString;
 }
 @property   (weak) IBOutlet NSWindow *window;
 @property   (nonatomic,weak)IBOutlet    NSTableView     *table;
@@ -236,6 +239,10 @@
                                                  encoding:NSUTF8StringEncoding];
     
     return jsonString;
+}
+
+-(NSString *)formatStringWithDictionary:(NSDictionary *)dictionary{
+    return [NSString stringWithFormat:@"my dictionary is %@", dictionary];
 }
 
 #pragma mark- tableView function
