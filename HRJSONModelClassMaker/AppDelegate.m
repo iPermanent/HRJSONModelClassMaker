@@ -102,6 +102,11 @@
     }
 }
 
+-(BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag{
+    [_window makeKeyAndOrderFront:self];
+    return YES;
+}
+
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
 }
