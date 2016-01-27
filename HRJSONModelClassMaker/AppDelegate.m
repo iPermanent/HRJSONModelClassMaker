@@ -64,6 +64,12 @@
     _paths      =   [NSMutableArray new];
     filePath.editable = NO;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *way = [defaults objectForKey:@"requestWay"];
+    if(way){
+        [requestWay selectItemAtIndex:way.intValue];
+    }
+    
     [requestWay setAction:@selector(requestWayChanged:)];
     [self requestWayChanged:requestWay];
 }
@@ -88,6 +94,9 @@
     if(![requestWay.selectedItem.title isEqualToString:@"Multipart Post"]){
         [_paths removeAllObjects];
     }
+    
+    NSString *index = [NSString stringWithFormat:@"%ld",[requestWay indexOfSelectedItem]];
+    [[NSUserDefaults standardUserDefaults] setObject:index forKey:@"requestWay"];
 }
 
 -(IBAction)selectUploadFilePath:(id)sender{
@@ -99,8 +108,10 @@
         if([requestWay.selectedItem.title isEqualToString:@"Post"])
             filePath.stringValue = files.path;
         else{
-            [_paths addObject:files.path];
-            [_filesTable reloadData];
+            if(![_paths containsObject:files.path]){
+                [_paths addObject:files.path];
+                [_filesTable reloadData];
+            }
         }
     }
 }
