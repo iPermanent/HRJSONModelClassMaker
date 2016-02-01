@@ -9,8 +9,10 @@
 #import "AppDelegate.h"
 #import "HRModelUtil.h"
 #import "HRApiClient.h"
+#import "HRHistoryManager.h"
+#import "HRImageDealView.h"
 
-@interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate>
+@interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate,NSComboBoxDataSource,NSComboBoxDelegate>
 {
     IBOutlet    NSTextField     *resultLabel;
     IBOutlet    NSTextField     *inputJsonText;
@@ -19,7 +21,7 @@
     
     NSString *outputPath;
     
-    IBOutlet    NSTextField     *url;
+    IBOutlet    NSComboBox     *url;
     IBOutlet    NSTextField     *keyTF;
     IBOutlet    NSTextField     *valueTF;
     
@@ -72,6 +74,9 @@
     
     [requestWay setAction:@selector(requestWayChanged:)];
     [self requestWayChanged:requestWay];
+    
+    url.dataSource = self;
+    url.delegate = self;
 }
 
 -(void)requestWayChanged:(NSPopUpButton *)requestButton{
@@ -147,7 +152,7 @@
         return;
     }
     
-    NSData *data = [inputJsonText.stringValue dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [realJsonString dataUsingEncoding:NSUTF8StringEncoding];
     id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     if(!json || ![json isKindOfClass:[NSDictionary class]] || [json isKindOfClass:[NSArray class]]){
         resultLabel.stringValue = @"格式有误";
@@ -166,6 +171,9 @@
     }
     NSButton *startBtn = sender;
     
+    NSLog(@"%@",[[HRHistoryManager sharedManager] getAllURLs]);
+    [[HRHistoryManager sharedManager] addURL:url.stringValue];
+    
     for(NSString *key in _headers.allKeys){
         [[[HRApiClient sharedClient] requestSerializer] setValue:_headers[key] forHTTPHeaderField:key];
     }
@@ -177,8 +185,8 @@
             [[HRApiClient sharedClient] postPathForUpload:url.stringValue andParameters:_parameters andData:[NSData dataWithContentsOfFile:filePath.stringValue] withName:@"file" completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
                 startBtn.enabled = YES;
                 if(aResponse){
-                    NSString *jsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.stringValue = jsonString;
+                    realJsonString = [self jsonStringWithObject:aResponse];
+                    inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
                 }else{
                     inputJsonText.stringValue = anError.description;
                 }
@@ -189,8 +197,8 @@
             //没有文件上传直接调post接口
             [[HRApiClient sharedClient] postPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task,    NSDictionary *aResponse, NSError *anError) {
                 if(aResponse){
-                    NSString *jsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.stringValue = jsonString;
+                    realJsonString = [self jsonStringWithObject:aResponse];
+                    inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];;
                 }else{
                     inputJsonText.stringValue = anError.description;
                 }
@@ -201,8 +209,9 @@
         startBtn.enabled = NO;
         [[HRApiClient sharedClient] getPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
-                NSString *jsonString = [self jsonStringWithObject:aResponse];
-                inputJsonText.stringValue = jsonString;
+                realJsonString = [self jsonStringWithObject:aResponse];
+                NSLog(@"%@",realJsonString);
+                inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
             }else{
                 inputJsonText.stringValue = anError.description;
             }
@@ -212,8 +221,8 @@
         startBtn.enabled = NO;
         [[HRApiClient sharedClient] uploadWithMultipartFormsparam:url.stringValue imageUrls:_paths andParameters:_parameters withCompletion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
-                NSString *jsonString = [self jsonStringWithObject:aResponse];
-                inputJsonText.stringValue = jsonString;
+                realJsonString = [self jsonStringWithObject:aResponse];
+                inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
             }else{
                 inputJsonText.stringValue = anError.description;
             }
@@ -240,6 +249,15 @@
     }
 }
 
+#pragma combonBox dataSource
+-(NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox{
+    return [[HRHistoryManager sharedManager] getAllURLs].count;
+}
+
+-(id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index{
+    return [[[HRHistoryManager sharedManager] getAllURLs] objectAtIndex:index];
+}
+
 -(NSString *) jsonStringWithObject:(id) object{
     NSError *error;
     NSData *jsondata=[NSJSONSerialization dataWithJSONObject:object
@@ -253,7 +271,8 @@
 }
 
 -(NSString *)formatStringWithDictionary:(NSDictionary *)dictionary{
-    return [NSString stringWithFormat:@"my dictionary is %@", dictionary];
+    NSString *unicdoe = [NSString stringWithFormat:@"%@",dictionary];
+    return [NSString stringWithCString:[unicdoe cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
 }
 
 #pragma mark- tableView function

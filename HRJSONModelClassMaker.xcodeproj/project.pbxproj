@@ -14,6 +14,8 @@
 		7E5358D01C488B9000429A75 /* HRModelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358CF1C488B9000429A75 /* HRModelUtil.m */; };
 		7E5358D31C489B6500429A75 /* HRBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D21C489B6500429A75 /* HRBaseModel.m */; };
 		7E5358D61C4BC78700429A75 /* HRApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D51C4BC78700429A75 /* HRApiClient.m */; };
+		7EF061681C5DDE0F00D5CE28 /* HRImageDealView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF061671C5DDE0F00D5CE28 /* HRImageDealView.m */; };
+		7EF0616B1C5DE34100D5CE28 /* HRHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0616A1C5DE34100D5CE28 /* HRHistoryManager.m */; };
 		ECE88DBC8F1B9509EEEB338B /* libPods-HRJSONModelClassMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,10 @@
 		7E5358D21C489B6500429A75 /* HRBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBaseModel.m; sourceTree = "<group>"; };
 		7E5358D41C4BC78700429A75 /* HRApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRApiClient.h; sourceTree = "<group>"; };
 		7E5358D51C4BC78700429A75 /* HRApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRApiClient.m; sourceTree = "<group>"; };
+		7EF061661C5DDE0F00D5CE28 /* HRImageDealView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRImageDealView.h; sourceTree = "<group>"; };
+		7EF061671C5DDE0F00D5CE28 /* HRImageDealView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRImageDealView.m; sourceTree = "<group>"; };
+		7EF061691C5DE34100D5CE28 /* HRHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRHistoryManager.h; sourceTree = "<group>"; };
+		7EF0616A1C5DE34100D5CE28 /* HRHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRHistoryManager.m; sourceTree = "<group>"; };
 		8943798348841D1377529348 /* Pods-HRJSONModelClassMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRJSONModelClassMaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRJSONModelClassMaker/Pods-HRJSONModelClassMaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +98,10 @@
 				7E5358CF1C488B9000429A75 /* HRModelUtil.m */,
 				7E5358D11C489B6500429A75 /* HRBaseModel.h */,
 				7E5358D21C489B6500429A75 /* HRBaseModel.m */,
+				7EF061661C5DDE0F00D5CE28 /* HRImageDealView.h */,
+				7EF061671C5DDE0F00D5CE28 /* HRImageDealView.m */,
+				7EF061691C5DE34100D5CE28 /* HRHistoryManager.h */,
+				7EF0616A1C5DE34100D5CE28 /* HRHistoryManager.m */,
 			);
 			path = HRJSONModelClassMaker;
 			sourceTree = "<group>";
@@ -240,8 +250,10 @@
 			files = (
 				7E5358C21C48878200429A75 /* main.m in Sources */,
 				7E5358D61C4BC78700429A75 /* HRApiClient.m in Sources */,
+				7EF061681C5DDE0F00D5CE28 /* HRImageDealView.m in Sources */,
 				7E5358BF1C48878200429A75 /* AppDelegate.m in Sources */,
 				7E5358D31C489B6500429A75 /* HRBaseModel.m in Sources */,
+				7EF0616B1C5DE34100D5CE28 /* HRHistoryManager.m in Sources */,
 				7E5358D01C488B9000429A75 /* HRModelUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +308,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -333,7 +345,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -371,7 +383,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipermanent.classmaker;
 				PRODUCT_NAME = "Request-Class";
-				PROVISIONING_PROFILE = "e747358e-2b49-4e73-b0da-1ff1ea786634";
+				PROVISIONING_PROFILE = "d41f73d6-0ebf-49a8-8efe-232c3d6744ae";
 			};
 			name = Release;
 		};
