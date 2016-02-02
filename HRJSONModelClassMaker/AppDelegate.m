@@ -15,7 +15,7 @@
 @interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate,NSComboBoxDataSource,NSComboBoxDelegate>
 {
     IBOutlet    NSTextField     *resultLabel;
-    IBOutlet    NSTextField     *inputJsonText;
+    IBOutlet    NSTextView     *inputJsonText;
     IBOutlet    NSTextField     *className;
     IBOutlet    NSTextField     *baseClassName;
     
@@ -64,6 +64,7 @@
     _parameters =   [NSMutableDictionary new];
     _headers    =   [NSMutableDictionary new];
     _paths      =   [NSMutableArray new];
+    
     filePath.editable = NO;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -153,6 +154,10 @@
     }
     
     NSData *data = [realJsonString dataUsingEncoding:NSUTF8StringEncoding];
+    if(!data || data.length == 0){
+        data = [inputJsonText.string dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
     id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     if(!json || ![json isKindOfClass:[NSDictionary class]] || [json isKindOfClass:[NSArray class]]){
         resultLabel.stringValue = @"格式有误";
@@ -166,7 +171,7 @@
 
 -(IBAction)startRequest:(id)sender{
     if(url.stringValue.length < 1 || ![url.stringValue hasPrefix:@"http://"]){
-        inputJsonText.stringValue = @"URL不合法，请检查！";
+        inputJsonText.string = @"URL不合法，请检查！";
         return;
     }
     NSButton *startBtn = sender;
@@ -186,21 +191,21 @@
                 startBtn.enabled = YES;
                 if(aResponse){
                     realJsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
                 }else{
-                    inputJsonText.stringValue = anError.description;
+                    inputJsonText.string = anError.description;
                 }
             } andProgress:^(long long sent, long long expectSend) {
-                inputJsonText.stringValue = [NSString stringWithFormat:@"%lld data sent of %lld total data need sent",sent,expectSend];
+                inputJsonText.string = [NSString stringWithFormat:@"%lld data sent of %lld total data need sent",sent,expectSend];
             }];
         }else{
             //没有文件上传直接调post接口
             [[HRApiClient sharedClient] postPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task,    NSDictionary *aResponse, NSError *anError) {
                 if(aResponse){
                     realJsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];;
+                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];;
                 }else{
-                    inputJsonText.stringValue = anError.description;
+                    inputJsonText.string = anError.description;
                 }
                 startBtn.enabled = YES;
             }];
@@ -211,9 +216,9 @@
             if(aResponse){
                 realJsonString = [self jsonStringWithObject:aResponse];
                 NSLog(@"%@",realJsonString);
-                inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
             }else{
-                inputJsonText.stringValue = anError.description;
+                inputJsonText.string = anError.description;
             }
             startBtn.enabled = YES;
         }];
@@ -222,9 +227,9 @@
         [[HRApiClient sharedClient] uploadWithMultipartFormsparam:url.stringValue imageUrls:_paths andParameters:_parameters withCompletion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 realJsonString = [self jsonStringWithObject:aResponse];
-                inputJsonText.stringValue = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
             }else{
-                inputJsonText.stringValue = anError.description;
+                inputJsonText.string = anError.description;
             }
             startBtn.enabled = YES;
         }];
@@ -271,8 +276,8 @@
 }
 
 -(NSString *)formatStringWithDictionary:(NSDictionary *)dictionary{
-    NSString *unicdoe = [NSString stringWithFormat:@"%@",dictionary];
-    return [NSString stringWithCString:[unicdoe cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
+    NSString *unicode = [NSString stringWithFormat:@"%@",dictionary];
+    return [NSString stringWithCString:[unicode cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
 }
 
 #pragma mark- tableView function

@@ -45,7 +45,7 @@ static HRHistoryManager *_sharedManager = nil;
 
 -(void)addURL:(NSString *)url{
     if(![_histories containsObject:url]){
-        [_histories addObject:url];
+        [_histories insertObject:url atIndex:0];
         [self saveHistories];
     }
 }

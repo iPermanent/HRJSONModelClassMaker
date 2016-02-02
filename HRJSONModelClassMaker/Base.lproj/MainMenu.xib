@@ -21,7 +21,7 @@
                 <outlet property="headerTF" destination="6Nz-qv-cO1" id="HWI-P0-YfX"/>
                 <outlet property="headerTable" destination="BO2-HE-hVs" id="AcK-Yv-TwU"/>
                 <outlet property="headerValueTF" destination="r2O-uB-HPr" id="3Ic-YM-hm3"/>
-                <outlet property="inputJsonText" destination="Xtu-g9-ZfW" id="z4O-eg-GMv"/>
+                <outlet property="inputJsonText" destination="YKk-Ue-tA8" id="dK2-id-2hV"/>
                 <outlet property="keyTF" destination="nFk-wL-XOo" id="VQz-o4-uIk"/>
                 <outlet property="requestWay" destination="htC-qe-E1W" id="vZt-br-Lm7"/>
                 <outlet property="resultLabel" destination="B4q-cz-2jO" id="DCg-Eh-nOH"/>
@@ -694,14 +694,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="964" height="645"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xtu-g9-ZfW">
-                        <rect key="frame" x="11" y="20" width="436" height="239"/>
-                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="6Eu-KQ-QjK">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pFj-eG-c2a">
                         <rect key="frame" x="465" y="231" width="118" height="32"/>
                         <buttonCell key="cell" type="push" title="选择输出路径" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jFM-kf-KBx">
@@ -1186,6 +1178,34 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </comboBoxCell>
                     </comboBox>
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mry-Yz-rN3">
+                        <rect key="frame" x="11" y="20" width="447" height="239"/>
+                        <clipView key="contentView" ambiguous="YES" id="Ya2-PW-k96">
+                            <rect key="frame" x="1" y="1" width="445" height="237"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="YKk-Ue-tA8">
+                                    <rect key="frame" x="0.0" y="0.0" width="445" height="237"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="445" height="237"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="445" height="237"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="mw7-4V-QGt">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cPV-mn-NAG">
+                            <rect key="frame" x="430" y="1" width="16" height="237"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                 </subviews>
             </view>
             <point key="canvasLocation" x="577" y="353.5"/>
