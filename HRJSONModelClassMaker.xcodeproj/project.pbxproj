@@ -14,6 +14,7 @@
 		7E5358D01C488B9000429A75 /* HRModelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358CF1C488B9000429A75 /* HRModelUtil.m */; };
 		7E5358D31C489B6500429A75 /* HRBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D21C489B6500429A75 /* HRBaseModel.m */; };
 		7E5358D61C4BC78700429A75 /* HRApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5358D51C4BC78700429A75 /* HRApiClient.m */; };
+		7EE6DE621C75615F00A625D4 /* demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6DE611C75615F00A625D4 /* demo.gif */; };
 		7EF061681C5DDE0F00D5CE28 /* HRImageDealView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF061671C5DDE0F00D5CE28 /* HRImageDealView.m */; };
 		7EF0616B1C5DE34100D5CE28 /* HRHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0616A1C5DE34100D5CE28 /* HRHistoryManager.m */; };
 		ECE88DBC8F1B9509EEEB338B /* libPods-HRJSONModelClassMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EF14BFA160CCE6E05AFC6E /* libPods-HRJSONModelClassMaker.a */; };
@@ -36,6 +37,7 @@
 		7E5358D21C489B6500429A75 /* HRBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBaseModel.m; sourceTree = "<group>"; };
 		7E5358D41C4BC78700429A75 /* HRApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRApiClient.h; sourceTree = "<group>"; };
 		7E5358D51C4BC78700429A75 /* HRApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRApiClient.m; sourceTree = "<group>"; };
+		7EE6DE611C75615F00A625D4 /* demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo.gif; sourceTree = "<group>"; };
 		7EF061661C5DDE0F00D5CE28 /* HRImageDealView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRImageDealView.h; sourceTree = "<group>"; };
 		7EF061671C5DDE0F00D5CE28 /* HRImageDealView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRImageDealView.m; sourceTree = "<group>"; };
 		7EF061691C5DE34100D5CE28 /* HRHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRHistoryManager.h; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		7E5358BC1C48878200429A75 /* HRJSONModelClassMaker */ = {
 			isa = PBXGroup;
 			children = (
+				7EE6DE611C75615F00A625D4 /* demo.gif */,
 				7E1FEC991C4DDD40001F6BC0 /* HRJSONModelClassMaker.entitlements */,
 				7E5358D41C4BC78700429A75 /* HRApiClient.h */,
 				7E5358D51C4BC78700429A75 /* HRApiClient.m */,
@@ -189,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E5358C41C48878200429A75 /* Assets.xcassets in Resources */,
+				7EE6DE621C75615F00A625D4 /* demo.gif in Resources */,
 				7E5358C71C48878200429A75 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
