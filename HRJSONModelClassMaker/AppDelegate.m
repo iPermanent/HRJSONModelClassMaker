@@ -170,13 +170,12 @@
 }
 
 -(IBAction)startRequest:(id)sender{
-    if(url.stringValue.length < 1 || ![url.stringValue hasPrefix:@"http://"]){
+    if(url.stringValue.length < 1 || ((![url.stringValue hasPrefix:@"http://"]) && (![url.stringValue hasPrefix:@"https://"]))){
         inputJsonText.string = @"URL不合法，请检查！";
         return;
     }
     NSButton *startBtn = sender;
     
-    NSLog(@"%@",[[HRHistoryManager sharedManager] getAllURLs]);
     [[HRHistoryManager sharedManager] addURL:url.stringValue];
     
     for(NSString *key in _headers.allKeys){
@@ -191,7 +190,10 @@
                 startBtn.enabled = YES;
                 if(aResponse){
                     realJsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                    if([self formatStringWithDictionary:aResponse])
+                        inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                    else
+                        inputJsonText.string = realJsonString;
                 }else{
                     inputJsonText.string = anError.description;
                 }
@@ -203,7 +205,10 @@
             [[HRApiClient sharedClient] postPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task,    NSDictionary *aResponse, NSError *anError) {
                 if(aResponse){
                     realJsonString = [self jsonStringWithObject:aResponse];
-                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];;
+                    if([self formatStringWithDictionary:aResponse])
+                        inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                    else
+                        inputJsonText.string = realJsonString;
                 }else{
                     inputJsonText.string = anError.description;
                 }
@@ -215,8 +220,10 @@
         [[HRApiClient sharedClient] getPath:url.stringValue parameters:_parameters completion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 realJsonString = [self jsonStringWithObject:aResponse];
-                NSLog(@"%@",realJsonString);
-                inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                if([self formatStringWithDictionary:aResponse])
+                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                else
+                    inputJsonText.string = realJsonString;
             }else{
                 inputJsonText.string = anError.description;
             }
@@ -227,7 +234,10 @@
         [[HRApiClient sharedClient] uploadWithMultipartFormsparam:url.stringValue imageUrls:_paths andParameters:_parameters withCompletion:^(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError *anError) {
             if(aResponse){
                 realJsonString = [self jsonStringWithObject:aResponse];
-                inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                if([self formatStringWithDictionary:aResponse])
+                    inputJsonText.string = [self formatStringWithDictionary:(NSDictionary *)aResponse];
+                else
+                    inputJsonText.string = realJsonString;
             }else{
                 inputJsonText.string = anError.description;
             }
@@ -276,7 +286,8 @@
 }
 
 -(NSString *)formatStringWithDictionary:(NSDictionary *)dictionary{
-    NSString *unicode = [NSString stringWithFormat:@"%@",dictionary];
+    NSString *unicode = [dictionary description];
+    
     return [NSString stringWithCString:[unicode cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
 }
 
