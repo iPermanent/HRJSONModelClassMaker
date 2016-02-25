@@ -139,11 +139,13 @@
         NSURL   *files = [[openDlg URLs] objectAtIndex:0];
         outputPath = files.path;
         if([requestWay.selectedItem.title isEqualToString:@"Post"]){
-            resultLabel.stringValue = outputPath;
+            
         }else{
             [_paths addObject:outputPath];
             [_filesTable reloadData];
         }
+        
+        resultLabel.stringValue = outputPath;
     }
 }
 
@@ -166,6 +168,8 @@
         if(baseClassName.stringValue.length > 0)
             [[HRModelUtil shareUtil] setBaseClassName:baseClassName.stringValue];
         [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:className.stringValue.length > 1?className.stringValue:@"baseModel"];
+        
+        resultLabel.stringValue = @"处理完成";
     }
 }
 
