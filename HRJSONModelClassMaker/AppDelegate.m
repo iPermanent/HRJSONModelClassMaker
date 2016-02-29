@@ -12,7 +12,7 @@
 #import "HRHistoryManager.h"
 #import "HRImageDealView.h"
 
-@interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate,NSComboBoxDataSource,NSComboBoxDelegate>
+@interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate,NSComboBoxDataSource,NSComboBoxDelegate,NSTextFieldDelegate>
 {
     IBOutlet    NSTextField     *resultLabel;
     IBOutlet    NSTextView     *inputJsonText;
@@ -170,6 +170,8 @@
         [[HRModelUtil shareUtil] dealClassWithDictionary:json WithClassName:className.stringValue.length > 1?className.stringValue:@"baseModel"];
         
         resultLabel.stringValue = @"处理完成";
+        
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:outputPath]];
     }
 }
 
@@ -295,6 +297,20 @@
     return [NSString stringWithCString:[unicode cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
 }
 
+- (void)controlTextDidChange:(NSNotification *)notification {
+    NSTextField *textField = [notification object];
+    NSLog(@"controlTextDidChange: stringValue == %@", [textField stringValue]);
+    //headerCell
+    if(textField.tag > 200){
+        NSInteger index = textField.tag - 200;
+        [_headers setObject:textField.stringValue forKey:_headers.allKeys[index]];
+    }else{
+        //valueCell
+        NSInteger index = textField.tag - 100;
+        [_parameters setObject:textField.stringValue forKey:_parameters.allKeys[index]];
+    }
+}
+
 #pragma mark- tableView function
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     if(tableView == _table){
@@ -315,14 +331,16 @@
         if([tableColumn.identifier isEqualToString:@"AutomaticTableColumnIdentifier.0"]){
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
             NSTextField *keyLabel = [self getShowLabel];
+            keyLabel.editable = NO;
             [cellView addSubview:keyLabel];
             keyLabel.stringValue = [_parameters.allKeys objectAtIndex:row];
             return cellView;
         }else if([tableColumn.identifier isEqualToString:@"AutomaticTableColumnIdentifier.1"]){
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
-            NSTextField *keyLabel = [self getShowLabel];
-            [cellView addSubview:keyLabel];
-            keyLabel.stringValue = [_parameters objectForKey:[_parameters.allKeys objectAtIndex:row]];
+            NSTextField *valueLabel = [self getShowLabel];
+            valueLabel.tag = 100+row;
+            [cellView addSubview:valueLabel];
+            valueLabel.stringValue = [_parameters objectForKey:[_parameters.allKeys objectAtIndex:row]];
             return cellView;
         }else{
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
@@ -339,14 +357,16 @@
         if([tableColumn.identifier isEqualToString:@"AutomaticTableColumnIdentifier.0"]){
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
             NSTextField *keyLabel = [self getShowLabel];
+            keyLabel.editable = NO;
             [cellView addSubview:keyLabel];
             keyLabel.stringValue = [_headers.allKeys objectAtIndex:row];
             return cellView;
         }else if([tableColumn.identifier isEqualToString:@"AutomaticTableColumnIdentifier.1"]){
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
-            NSTextField *keyLabel = [self getShowLabel];
-            [cellView addSubview:keyLabel];
-            keyLabel.stringValue = [_headers objectForKey:[_headers.allKeys objectAtIndex:row]];
+            NSTextField *valueLabel = [self getShowLabel];
+            [cellView addSubview:valueLabel];
+            valueLabel.tag = 200 + row;
+            valueLabel.stringValue = [_headers objectForKey:[_headers.allKeys objectAtIndex:row]];
             return cellView;
         }else{
             NSTableCellView *cellView = [[NSTableCellView alloc] init];
@@ -388,6 +408,7 @@
 -(NSTextField *)getShowLabel{
     NSTextField *keyLabel = [[NSTextField alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
     keyLabel.alignment = NSTextAlignmentCenter;
+    keyLabel.delegate = self;
     
     return keyLabel;
 }

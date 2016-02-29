@@ -64,7 +64,7 @@ static HRModelUtil *_modelUtl = nil;
         return [NSString stringWithFormat:@"@property (nonatomic, copy) %@ *%@;\n",property,property];
     }else if([value isKindOfClass:[NSNumber class]]){
         return [NSString stringWithFormat:@"@property (nonatomic, strong) NSNumber *%@;\n",property];
-    }else if([value isKindOfClass:[NSArray class]]){
+    }else if([value isKindOfClass:[NSArray class]] && [value count] > 0){
         id obj = value[0];
         if(![obj isKindOfClass:[NSString class]] && ![obj isKindOfClass:[NSNumber class]]){
             [self dealClassWithDictionary:[value firstObject] WithClassName:property];
