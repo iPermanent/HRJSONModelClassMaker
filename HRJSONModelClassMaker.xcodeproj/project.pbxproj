@@ -387,7 +387,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipermanent.classmaker;
 				PRODUCT_NAME = "Request-Class";
-				PROVISIONING_PROFILE = "a5fe13e6-f803-42ad-93ec-5e3edf996b49";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

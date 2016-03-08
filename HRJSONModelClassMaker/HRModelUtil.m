@@ -44,10 +44,18 @@ static HRModelUtil *_modelUtl = nil;
     [writeString appendString:@"#import <Foundation/Foundation.h>\n\n"];
     
     //add properties
-    [writeString appendFormat:@"@interface %@ : %@<NSCoding>\n\n",_baseClassName?_baseClassName:@"NSObject",className];
+    [writeString appendFormat:@"@interface %@ : %@<NSCoding>\n\n",className,_baseClassName?_baseClassName:@"NSObject"];
     for(NSString *key in dictionary.allKeys){
         NSLog(@"%@",key);
         [writeString appendString:[self getPropertyParamStringByProperty:key value:dictionary[key]]];
+        if([dictionary[key] isKindOfClass:[NSDictionary class]]){
+            NSRange range = [writeString rangeOfString:@".h\"" options:NSBackwardsSearch];
+            if(range.location == NSNotFound){
+                range = [writeString rangeOfString:@".h>"];
+            }
+            NSString *insertHeader = [NSString stringWithFormat:@"\n#import \"%@.h\"",key];
+            [writeString insertString:insertHeader atIndex:range.location+range.length];
+        }
     }
     
     //add end
@@ -61,7 +69,7 @@ static HRModelUtil *_modelUtl = nil;
         return [NSString stringWithFormat:@"@property (nonatomic, copy) NSString *%@;\n",property];
     }else if([value isKindOfClass:[NSDictionary class]]){
         [self dealClassWithDictionary:value WithClassName:property];
-        return [NSString stringWithFormat:@"@property (nonatomic, copy) %@ *%@;\n",property,property];
+        return [NSString stringWithFormat:@"@property (nonatomic, strong) %@ *%@;\n",property,property];
     }else if([value isKindOfClass:[NSNumber class]]){
         return [NSString stringWithFormat:@"@property (nonatomic, strong) NSNumber *%@;\n",property];
     }else if([value isKindOfClass:[NSArray class]] && [value count] > 0){
@@ -112,7 +120,7 @@ static HRModelUtil *_modelUtl = nil;
     [decodeStr appendString:@"-(id)initWithCoder:(NSCoder *)aDecoder{\n self = [super init];\n   if(self){\n"];
     
     for(NSString *key in dictionary.allKeys){
-        NSString *formatString = [NSString stringWithFormat:@"      _%@ =   [aDecoder decodeIntForKey:@\"%@\"];\n",key,key];
+        NSString *formatString = [NSString stringWithFormat:@"      _%@ =   [aDecoder decodeObjectForKey:@\"%@\"];\n",key,key];
         [decodeStr appendString:formatString];
     }
     

@@ -299,6 +299,8 @@
 
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField *textField = [notification object];
+    if(textField == url || textField == className || textField == baseClassName)
+        return;
     NSLog(@"controlTextDidChange: stringValue == %@", [textField stringValue]);
     //headerCell
     if(textField.tag > 200){
