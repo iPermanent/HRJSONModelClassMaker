@@ -23,7 +23,7 @@ static HRApiClient *_sharedClient = nil;
         //响应json数据
         _sharedClient.responseSerializer  = [AFJSONResponseSerializer serializer];
 
-        _sharedClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",@"application/atom+xml",@"application/xml",@"text/xml", nil];
+        _sharedClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",@"application/atom+xml",@"application/xml",@"text/xml",@"application/octet-stream",@"multipart/mixed", nil];
     });
     
     return _sharedClient;
