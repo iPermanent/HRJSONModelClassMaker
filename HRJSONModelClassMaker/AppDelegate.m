@@ -11,6 +11,8 @@
 #import "HRApiClient.h"
 #import "HRHistoryManager.h"
 #import "HRImageDealView.h"
+#import "HRCustomModelVC.h"
+#import "HRData.h"
 
 @interface AppDelegate ()<NSTableViewDataSource,NSTableViewDelegate,NSMenuDelegate,NSComboBoxDataSource,NSComboBoxDelegate,NSTextFieldDelegate>
 {
@@ -45,6 +47,8 @@
 @property   (nonatomic,strong)NSMutableArray        *paths;
 
 @property   (nonatomic,weak)IBOutlet NSScrollView    *tableBase;
+
+@property   (nonatomic,strong)NSWindowController    *myCustomWindow;
 @end
 
 @implementation AppDelegate
@@ -173,6 +177,27 @@
         
         [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:outputPath]];
     }
+}
+
+-(IBAction)startCustomOutput:(id)sender{
+    NSData *data = [realJsonString dataUsingEncoding:NSUTF8StringEncoding];
+    if(!data || data.length == 0){
+        data = [inputJsonText.string dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    if(!json || ![json isKindOfClass:[NSDictionary class]] || [json isKindOfClass:[NSArray class]]){
+        resultLabel.stringValue = @"格式有误";
+        return;
+    }
+    [[HRData shareData] setDataDic:json];
+    HRCustomModelVC *custVC = [[HRCustomModelVC alloc] initWithWindowNibName:@"HRCustomWindow"];
+//    NSScreen * screen = [NSScreen deepestScreen];
+//    [custVC.window setFrameOrigin:NSMakePoint(20, screen.visibleFrame.size.height - screen.visibleFrame.origin.y - screen.visibleFrame.size.height * 0.8 + 15)];
+//    [custVC.window setContentSize:NSMakeSize(screen.visibleFrame.size.width * 0.8, screen.visibleFrame.size.height * 0.8)];
+    [custVC showWindow:nil];
+    [custVC.window makeKeyAndOrderFront:self];
+    _myCustomWindow = custVC;
 }
 
 -(IBAction)startRequest:(id)sender{

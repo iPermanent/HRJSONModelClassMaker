@@ -4,6 +4,7 @@ platform :osx, '10.11.4'
 target 'HRJSONModelClassMaker' do
 
 pod 'AFNetworking', '~> 2.6.3'
+pod 'Masonry', '~> 1.0.1'
 
 end
 

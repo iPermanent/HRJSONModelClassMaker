@@ -22,6 +22,22 @@ static HRApiClient *_sharedClient = nil;
         _sharedClient.requestSerializer = [AFJSONRequestSerializer serializer];
         //响应json数据
         _sharedClient.responseSerializer  = [AFJSONResponseSerializer serializer];
+        
+        NSMutableIndexSet *indexSets = [NSMutableIndexSet new];
+        [indexSets addIndex:500];
+        [indexSets addIndex:501];
+        [indexSets addIndex:502];
+        [indexSets addIndex:503];
+        [indexSets addIndex:504];
+        [indexSets addIndex:505];
+        [indexSets addIndex:200];
+        [indexSets addIndex:201];
+        [indexSets addIndex:202];
+        [indexSets addIndex:203];
+        [indexSets addIndex:204];
+        [indexSets addIndex:205];
+        [indexSets addIndex:206];
+        _sharedClient.responseSerializer.acceptableStatusCodes = indexSets;
 
         _sharedClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",@"application/atom+xml",@"application/xml",@"text/xml",@"application/octet-stream",@"multipart/mixed", nil];
     });

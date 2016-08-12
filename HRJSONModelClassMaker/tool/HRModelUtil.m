@@ -96,7 +96,7 @@ static HRModelUtil *_modelUtl = nil;
     [writeBodyStr appendString:@"\n"];
     [writeBodyStr appendString:[self getDecodeFunction:dictionary]];
     
-    [writeBodyStr appendString:@"@end"];
+    [writeBodyStr appendString:@"\n@end"];
     
     return writeBodyStr;
 }
@@ -106,7 +106,7 @@ static HRModelUtil *_modelUtl = nil;
     [encodeStr appendString:@"-(void)encodeWithCoder:(NSCoder *)aCoder{\n"];
     
     for(NSString *key in dictionary.allKeys){
-        NSString *formatString = [NSString stringWithFormat:@"  [aCoder encodeObject:_%@ forKey:@\"%@\"];\n",key,key];
+        NSString *formatString = [NSString stringWithFormat:@"      [aCoder encodeObject:_%@ forKey:@\"%@\"];\n",key,key];
         [encodeStr appendString:formatString];
     }
     
@@ -117,14 +117,14 @@ static HRModelUtil *_modelUtl = nil;
 
 -(NSString *)getDecodeFunction:(NSDictionary *)dictionary{
     NSMutableString *decodeStr = [NSMutableString new];
-    [decodeStr appendString:@"-(id)initWithCoder:(NSCoder *)aDecoder{\n self = [super init];\n   if(self){\n"];
+    [decodeStr appendString:@"-(id)initWithCoder:(NSCoder *)aDecoder{\n     self = [super init];\n   if(self){\n"];
     
     for(NSString *key in dictionary.allKeys){
         NSString *formatString = [NSString stringWithFormat:@"      _%@ =   [aDecoder decodeObjectForKey:@\"%@\"];\n",key,key];
         [decodeStr appendString:formatString];
     }
     
-    [decodeStr appendString:@"  }\nreturn self;\n}"];
+    [decodeStr appendString:@"  }\n     return self;\n}"];
     
     return decodeStr;
 }
